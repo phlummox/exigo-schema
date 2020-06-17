@@ -1,0 +1,9 @@
+resolver: lts-13.30
+
+packages:
+- .
+
+extra-deps:
+- string-interpolate-0.2.0.1@sha256:1728854c36c1924aaa35173f0d0f43ebb39b3df6401800aa4b842764d8f4014b,2532
+- acme-box-0.0.0.0@sha256:9c5c9112ed6da849f4a6deedd472e3fab16ebcd17e8fefdc9a53743ef12f42e9
+

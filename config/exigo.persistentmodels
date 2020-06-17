@@ -1,0 +1,26 @@
+
+Student
+    studNo              Text
+    Primary             studNo
+    name                Text
+    deriving Show
+    deriving Eq
+    deriving Generic
+
+Submission
+    student             StudentId
+    Primary             student
+    studentLogin        Text
+    path                FilePath
+    deriving Show
+    deriving Eq
+    deriving Generic
+
+LatePenalty
+    student             StudentId
+    Primary             student
+    daysLate            Int
+    deriving Show
+    deriving Eq
+    deriving Generic
+
