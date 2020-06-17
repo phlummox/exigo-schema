@@ -36,7 +36,6 @@ library
     , binary
     , bytestring
     , persistent
-    , persistent-sqlite
     , persistent-template
     , template-haskell
     , text
