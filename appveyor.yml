@@ -1,0 +1,97 @@
+
+# windows path separator needs
+# a backslash if explicitly in a YAML
+# string ("c:\\WORK") but otherwise does
+# not.
+
+clone_folder: "c:\\WORK"
+clone_depth: 5
+
+# Do not build feature branch with open Pull Requests
+skip_branch_with_pr: true
+
+platform:
+- x86_64
+
+cache:
+- .stack-work
+- dist-newstyle
+- "c:\\sr" ## "c:\\sr -> appveyor.yml" ##
+- "c:\\Users\\appveyor\\AppData\\Local\\Programs\\stack"
+- "C:\\Users\\appveyor\\AppData\\Roaming\\cabal"
+# probably won't work, as appveyor caches
+# are limited to (compressed) about 1GB:
+- "C:\\Users\\appveyor\\AppData\\Roaming\\local"
+
+environment:
+  global:
+    STACK_ROOT: "c:\\sr"
+    CABALVER: 2.4.1.0
+
+  matrix:
+    - GHCVER: 8.6.5
+    - STACK_RESOLVER: lts-13
+
+install:
+- choco source add -n mistuke -s https://www.myget.org/F/mistuke/api/v2
+- choco install -y cabal --version %CABALVER%
+- choco install -y ghc   --version 8.6.5
+
+- curl -sS -ostack.zip -L --insecure https://get.haskellstack.org/stable/windows-x86_64.zip
+- 7z x stack.zip stack.exe
+
+- refreshenv
+
+# bash, unlike cmd, refuses to exec files from
+# current dir
+- if not exist c:\sr\bin mkdir c:\sr\bin
+- cp stack.exe c:\sr\bin
+
+before_build:
+  - where cabal
+  - where ghc
+  - where stack
+  - cabal --version
+  - ghc   --version
+  - stack  --version
+
+
+  # ridiculously, v2- cabal commands don't reliably install executables on windows,
+  # so use v1
+  - cabal -v v1-update
+  # other useful paths:
+  # - c:\ProgramData\chocolatey\bin
+  # - c:\ProgramData\chocolatey
+  - set PATH=C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\bin;C:\Program Files\Git\usr\bin;c:\sr\bin;C:\Users\appveyor\AppData\Roaming\local\bin;C:\Users\appveyor\AppData\Roaming\cabal\bin;%PATH%
+  - where bash
+
+
+# use Git's bash, because writing in DOS batch
+# is too goddamn awful.
+# NB that to get line ends handled properly on Windows:
+# the best way is actually not to use them. The step below
+# will actually get sent to cmd all as one big line, I believe,
+# so we take care to end statements with semicolons, and note
+# that we can't use '#', "-to-end-of-line" comments.
+build_script:
+  - "bash -c \"echo starting build; set -ex;
+    if [[ -z $STACK_RESOLVER ]]; then
+      cabal v1-install --bindir=c:/sr/bin happy;
+      which happy;
+      cabal v1-install --bindir=c:/sr/bin --enable-tests --dependencies-only --dry-run;
+      cabal v1-install --bindir=c:/sr/bin --enable-tests --dependencies-only;
+      cabal v1-configure --bindir=c:/sr/bin --enable-tests;
+      cabal v1-build;
+      echo tests with cabal involve fiddling around with search paths..;
+      echo So we only bother to test under Stack;
+      echo WAS: cabal v1-test;
+      cabal v1-install --bindir=c:/sr/bin;
+    else
+      stack --resolver=$STACK_RESOLVER setup;
+      stack --no-terminal --resolver $STACK_RESOLVER --stack-yaml stack-lts-13.yaml build ;
+      stack --no-terminal --resolver $STACK_RESOLVER --stack-yaml stack-lts-13.yaml test ;
+    fi;
+    find c:/sr/bin
+    \""
+
+

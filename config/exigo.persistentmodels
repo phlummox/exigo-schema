@@ -1,5 +1,5 @@
 
-Student
+Student json
     studNo              Text
     Primary             studNo
     name                Text
@@ -7,7 +7,7 @@ Student
     deriving Eq
     deriving Generic
 
-Submission
+Submission json
     student             StudentId
     Primary             student
     studentLogin        Text
@@ -16,7 +16,7 @@ Submission
     deriving Eq
     deriving Generic
 
-LatePenalty
+LatePenalty json
     student             StudentId
     Primary             student
     daysLate            Int
