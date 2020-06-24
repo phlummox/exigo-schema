@@ -43,7 +43,7 @@ mkSaveAssessmentMetadata name' mData' = do
   let name = mkName name'
   mData <- lift mData'
   return [ SigD name $ ConT ''AssessmentMetadata
-         , FunD name [normalClause [] mData]
+         , ValD (VarP name) (NormalB mData) []
          ]
 
 -- | create a function which returns all the question-type field
@@ -61,9 +61,12 @@ mkSaveAssessmentMetadata name' mData' = do
 -- where the accessors are in the order they appear
 -- in the EntityDef.
 mkQuestionFieldsAccessor :: MkPersistSettings -> String -> [EntityDef] -> Q [Dec]
-mkQuestionFieldsAccessor mpSettings nm es =
-  let es' = filter isMarks es
-  in concat <$> mapM (mkAcc nm) es'
+mkQuestionFieldsAccessor mpSettings nm es = do
+    let es' = filter isMarks es
+    case es' of
+      [] -> error "no entities with name 'Marks' - did you call mkQuestionFieldsAccessor intentionally?"
+      [_] -> concat <$> mapM (mkAcc nm) es'
+      _   -> error "multiple entities with name 'Marks' - did you call mkQuestionFieldsAccessor intentionally?"
   where
 
     mkAcc :: String -> EntityDef -> Q [Dec]
