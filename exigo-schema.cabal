@@ -19,6 +19,7 @@ extra-source-files:
     config/exigo.persistentmodels
 -- builds & tests successfully as far back as stack lts-7
 tested-with:         GHC == 8.0.1
+                     GHC == 8.2.2
                      GHC == 8.6.5
 
 source-repository head
