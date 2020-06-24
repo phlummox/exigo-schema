@@ -16,8 +16,10 @@ build-type:     Simple
 extra-source-files:
     README.md
     ChangeLog.md
+    stack-lts-13.yaml
     config/exigo.persistentmodels
--- builds & tests successfully as far back as stack lts-7
+    .travis.yml
+-- builds & tests successfully as far back as stack lts-7/ghc-8.0
 tested-with:         GHC == 8.0.1
                      GHC == 8.2.2
                      GHC == 8.6.5
@@ -35,7 +37,7 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.0 && <5
+      base >=4.9 && <5
     , aeson
     , binary
     , bytestring
@@ -48,14 +50,15 @@ library
   ghc-options:
       -Wall
       -fwarn-tabs
-      -Wredundant-constraints
-      -Wno-type-defaults
-      -Wcompat
-      -Wextra
-      -Widentities
-      -Wincomplete-record-updates
-      -Wincomplete-uni-patterns
-      -Wno-name-shadowing
+  if impl(ghc >= 8.0)
+    ghc-options:        -Wredundant-constraints
+                        -Wno-type-defaults
+                        -Wcompat
+                        -Widentities
+                        -Wincomplete-record-updates
+                        -Wincomplete-uni-patterns
+                        -Wno-name-shadowing
+                        -Wextra
   if impl(ghc >= 8.2)
     ghc-options:        -fhide-source-paths
   if impl(ghc >= 8.4)
