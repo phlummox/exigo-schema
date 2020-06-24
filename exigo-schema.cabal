@@ -42,7 +42,24 @@ library
     , th-lift-instances
   default-language: Haskell2010
   ghc-options:
-      -Wall -Wextra -Wcompat -Wincomplete-record-updates
-      -Wincomplete-uni-patterns -Wredundant-constraints -fwarn-tabs
-      -Wno-name-shadowing -Wno-type-defaults
+      -Wall
+      -fwarn-tabs
+      -Wredundant-constraints
+      -Wno-type-defaults
+      -Wcompat
+      -Wextra
+      -Widentities
+      -Wincomplete-record-updates
+      -Wincomplete-uni-patterns
+      -Wno-name-shadowing
+  if impl(ghc >= 8.2)
+    ghc-options:        -fhide-source-paths
+  if impl(ghc >= 8.4)
+    ghc-options:        -Wmissing-export-lists
+                        -Wpartial-fields
+  if impl(ghc >= 8.8)
+    ghc-options:        -Wmissing-deriving-strategies
 
+  -- could add: -fenable-th-splice-warnings
+
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
