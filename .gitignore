@@ -1,5 +1,27 @@
-.stack-work/
-*~
-.*.swp
-*.hi
+### Haskell
+dist
+dist-*
+cabal-dev
 *.o
+*.hi
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+*.prof
+*.aux
+*.hp
+*.eventlog
+.cabal-sandbox/
+cabal.sandbox.config
+cabal.config
+cabal.project.local
+### Stack
+.stack-work/
+stack.yaml.lock
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+*~
