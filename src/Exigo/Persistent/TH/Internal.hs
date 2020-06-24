@@ -18,6 +18,7 @@ import           Database.Persist           ( FieldDef(..)
                                             , FieldType(FTTypeCon)
                                             , HaskellName(..) )
 import           Data.Char
+import           Data.Monoid                ( (<>) )
 import qualified Data.Text as T
 import           Data.Text                  ( Text, cons, uncons )
 import           Database.Persist.TH        ( MkPersistSettings(..) )
