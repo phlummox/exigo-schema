@@ -12,6 +12,20 @@
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 
+-- other extensions, needed to compile
+-- for recent persistent-template versions
+
+{-# LANGUAGE CPP                        #-}
+
+#if MIN_VERSION_persistent_template(2,7,2)
+{-# LANGUAGE UndecidableInstances #-}
+#endif
+
+#if MIN_VERSION_persistent_template(2,8,0)
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE StandaloneDeriving #-}
+#endif
+
 {- |
 
 Basic database schema for exigo tools.
