@@ -105,6 +105,9 @@ install:
       # the .cabal files needed by cabal-install.
       PACKAGES=$(stack --install-ghc query locals | grep '^ *path' | sed 's@^ *path:@@')
 
+      # v1-install fails to correctly install happy as required build tool for
+      #  haskell-src-exts
+      cabal install --ghc-options=-O0 --reorder-goals --max-backjumps=-1 $CABALARGS happy
       cabal install --only-dependencies --enable-tests --enable-benchmarks --force-reinstalls --ghc-options=-O0 --reorder-goals --max-backjumps=-1 $CABALARGS $PACKAGES
       ;;
   esac
