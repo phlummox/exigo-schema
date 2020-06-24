@@ -62,7 +62,9 @@ before_install:
     travis_retry curl --insecure -L https://get.haskellstack.org/stable/osx-x86_64.tar.gz | tar xz --strip-components=1 --include '*/stack' -C ~/.local/bin
   else
     # recent versions of stack fail to work with lts <= 7
-    if [[ $ARGS == *"lts-7"* ]]; then
+    # but we don't expect to build with lts <= 5, so just 2 checks
+    # to do.
+    if [[ $ARGS == *"lts-7"* || $ARGS == *"lts-6"* ]]; then
       url=https://github.com/commercialhaskell/stack/releases/download/v1.9.3/stack-1.9.3-linux-x86_64.tar.gz
     else
       url=https://get.haskellstack.org/stable/linux-x86_64.tar.gz
