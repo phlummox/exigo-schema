@@ -83,11 +83,4 @@ instance Binary   (Key Student) where
 instance Binary   Submission    where
 instance Binary   LatePenalty   where
 
-instance FromJSON Student       where
-instance FromJSON Submission    where
-instance FromJSON LatePenalty   where
-
-instance ToJSON   Student       where
-instance ToJSON   Submission    where
-instance ToJSON   LatePenalty   where
 
