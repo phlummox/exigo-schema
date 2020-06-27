@@ -12,6 +12,8 @@
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE StandaloneDeriving         #-}
 
+{-# OPTIONS_GHC -Wno-duplicate-exports #-}
+
 -- other extensions, needed to compile
 -- for recent persistent-template versions
 
@@ -59,6 +61,8 @@ module Exigo.Persistent.Schema
   , StudentKey
   , SubmissionKey
   , LatePenaltyKey
+    -- * Instances
+  , module Exigo.Persistent.Schema
   )
   where
 
