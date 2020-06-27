@@ -38,21 +38,20 @@ individual assessments.
 
 module Exigo.Persistent.Schema
   (
+    -- * Database entities
     -- | Represents a student
     Student(..)
-    -- | A student ID
   , StudentId
     -- | Submission made by a 'Student'
   , Submission(..)
-    -- | 'Submission' ID
   , SubmissionId
     -- | A late penalty applied
   , LatePenalty(..)
-    -- | 'LatePenalty' ID
   , LatePenaltyId
+    -- * Runtime access to schema
     -- | Saved entities from this schema
   , savedMainModel
-    -- | Keys for entities
+    -- * Keys for entities
   , Key(StudentKey,SubmissionKey
         ,LatePenaltyKey
         ,unStudentKey,unLatePenaltyKey

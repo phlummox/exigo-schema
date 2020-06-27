@@ -1,25 +1,30 @@
 
+-- | A student
 Student json
-    studNo              Text
+    studNo              Text    -- | unique 'Student' id
     Primary             studNo
-    name                Text
+    name                Text    -- | student name
     deriving Show
     deriving Eq
     deriving Generic
 
+-- | Submission made by a student
+-- for an assessment
 Submission json
-    student             StudentId
+    student             StudentId  -- | the submitting 'Student'
     Primary             student
-    studentLogin        Text
-    path                FilePath
+    studentLogin        Text       -- | the logon used
+    path                FilePath   -- | path to the submission
     deriving Show
     deriving Eq
     deriving Generic
 
+-- | Late penalty to be applied to
+-- a student's submission
 LatePenalty json
-    student             StudentId
+    student             StudentId   -- | the submitting 'Student'
     Primary             student
-    daysLate            Int
+    daysLate            Int         -- | no. of days late
     deriving Show
     deriving Eq
     deriving Generic
