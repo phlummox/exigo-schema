@@ -42,7 +42,7 @@ module Exigo.Persistent.Schema
     Student(..)
     -- | A student ID
   , StudentId
-    -- | Submission made by a 'Student'.
+    -- | Submission made by a 'Student'
   , Submission(..)
     -- | 'Submission' ID
   , SubmissionId
@@ -52,6 +52,14 @@ module Exigo.Persistent.Schema
   , LatePenaltyId
     -- | Saved entities from this schema
   , savedMainModel
+    -- | Keys for entities
+  , Key(StudentKey,SubmissionKey
+        ,LatePenaltyKey
+        ,unStudentKey,unLatePenaltyKey
+        ,unSubmissionKey)
+  , StudentKey
+  , SubmissionKey
+  , LatePenaltyKey
   )
   where
 
@@ -83,4 +91,7 @@ instance Binary   (Key Student) where
 instance Binary   Submission    where
 instance Binary   LatePenalty   where
 
+type StudentKey = Key Student
+type LatePenaltyKey = Key LatePenalty
+type SubmissionKey = Key Submission
 
