@@ -78,17 +78,22 @@ test-suite exigo-schema-test
                     , aeson
                     , bytestring
                     , directory
+                    , esqueleto
                     , exceptions
                     , hint
                     , hspec
                     , hspec-core
                     , interpolate
+                    , monad-logger
+                    , mtl
                     , persistent
+                    , persistent-sqlite
                     , persistent-template
                     -- , process
                     -- ^^ used for debugging
                     , quickcheck-text
                     , QuickCheck
+                    , resourcet
                     , temporary
                     , template-haskell
                     , text
