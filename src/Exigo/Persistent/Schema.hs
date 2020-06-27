@@ -39,15 +39,15 @@ individual assessments.
 module Exigo.Persistent.Schema
   (
     -- | Represents a student
-    Student
+    Student(..)
     -- | A student ID
   , StudentId
     -- | Submission made by a 'Student'.
-  , Submission
+  , Submission(..)
     -- | 'Submission' ID
   , SubmissionId
     -- | A late penalty applied
-  , LatePenalty
+  , LatePenalty(..)
     -- | 'LatePenalty' ID
   , LatePenaltyId
     -- | Saved entities from this schema
@@ -55,7 +55,7 @@ module Exigo.Persistent.Schema
   )
   where
 
-import          Data.Aeson
+import          Data.Aeson ()
 import          Data.Binary
 import          Data.Text               (Text)
 import          Database.Persist.TH     (
